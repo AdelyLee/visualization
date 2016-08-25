@@ -1,0 +1,469 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Demo</title>
+		<link rel="stylesheet" href="js/bootstrap-3.3.6/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery.gridster.css">
+		<link rel="stylesheet" type="text/css" href="css/demo.css">
+		<link rel="stylesheet" type="text/css" href="css/tabs.css">
+
+		<script type="text/javascript">
+			var ctx = getRootPath();
+
+			function getRootPath() {
+				//获得根目录
+				var strFullPath = window.document.location.href;
+				var strPath = window.document.location.pathname;
+				var pos = strFullPath.indexOf(strPath);
+				var prePath = strFullPath.substring(0, pos);
+				var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1);
+				return (prePath + postPath);
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<header>
+			<div id="logo"></div>
+			<div id="settings">
+				<div class="buttons">
+					<nav class="first_nav clearfix">
+						<div type="button" class="btn" data-toggle="modal" data-target="#addChartModal">添加</div>
+					</nav>
+				</div>
+			</div>
+		</header>
+		<div id="content">
+			<div class="gridster">
+				<ul>
+					<li id="grid_item_12" onmouseover="displaySettings(this)" onmouseout="hideSettings(this)" data-col="1" data-row="1" data-sizex="17" data-sizey="8" class="gs-w" style="display: list-item;">
+						<div class="setting" style="display: none;">
+							<drag class="btn"><i class="glyphicon glyphicon-move"></i>拖动</drag>
+							<span class="btn" onclick="showSettingsBox()">设置</span>
+							<span class="btn delete" onclick="deleteGrid(this)">删除</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="settingBox" style="display: none;">
+			<div>
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs nav1" role="tablist">
+					<li role="presentation" class="active"><a href="#dataSetting" aria-controls="dataSetting" role="tab" data-toggle="tab">数据设置</a></li>
+					<li role="presentation"><a href="#paramSetting" aria-controls="paramSetting" role="tab" data-toggle="tab">参数设置</a></li>
+					<li class="close-btn-li" onclick="closeSettingsBox()"><a href="#" class="close-btn btn-primary">关闭</a></li>
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content content1">
+					<div role="tabpanel" class="tab-pane active" id="dataSetting">数据设置</div>
+					<div role="tabpanel" class="tab-pane" id="paramSetting">
+						<ul class="nav nav-tabs nav2" role="tablist">
+							<li role="presentation" class="active"><a href="#param-base-setting" aria-controls="param-base-setting" role="tab" data-toggle="tab">基础</a></li>
+							<li role="presentation"><a href="#param-title-setting" aria-controls="param-title-setting" role="tab" data-toggle="tab">标题</a></li>
+							<li role="presentation"><a href="#param-grid-setting" aria-controls="param-grid-setting" role="tab" data-toggle="tab">视区</a></li>
+							<li role="presentation"><a href="#param-xAxis-setting" aria-controls="param-xAxis-setting" role="tab" data-toggle="tab">X轴</a></li>
+							<li role="presentation"><a href="#param-yAxis-setting" aria-controls="param-yAxis-setting" role="tab" data-toggle="tab">Y轴</a></li>
+							<li role="presentation"><a href="#param-legend-setting" aria-controls="param-legend-setting" role="tab" data-toggle="tab">图例</a></li>
+							<li role="presentation"><a href="#param-tooltip-setting" aria-controls="param-tooltip-setting" role="tab" data-toggle="tab">提示</a></li>
+							<li role="presentation"><a href="#param-toolbox-setting" aria-controls="param-toolbox-setting" role="tab" data-toggle="tab">工具</a></li>
+							<li role="presentation"><a href="#param-range-setting" aria-controls="param-range-setting" role="tab" data-toggle="tab">值域</a></li>
+							<li role="presentation"><a href="#param-zoom-setting" aria-controls="param-zoom-setting" role="tab" data-toggle="tab">缩放</a></li>
+							<li role="presentation"><a href="#param-radar-setting" aria-controls="param-radar-setting" role="tab" data-toggle="tab">雷达</a></li>
+							<li role="presentation"><a href="#param-code-setting" aria-controls="param-code-setting" role="tab" data-toggle="tab">代码</a></li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content content2">
+							<div role="tabpanel" class="tab-pane active" id="param-base-setting">
+								<ul class="nav nav-tabs nav3" role="tablist">
+									<li role="presentation" class="active"><a href="#base-common-setting" aria-controls="base-common-setting" role="tab" data-toggle="tab">通用</a></li>
+									<li role="presentation"><a href="#base-high-setting" aria-controls="base-high-setting" role="tab" data-toggle="tab">高级</a></li>
+									<li role="presentation"><a href="#base-series0-setting" aria-controls="base-series0-setting" role="tab" data-toggle="tab">系列0</a></li>
+									<li role="presentation"><a href="#base-series1-setting" aria-controls="base-series1-setting" role="tab" data-toggle="tab">系列1</a></li>
+								</ul>
+								<!-- Tab panes -->
+								<div class="tab-content content3">
+									<div role="tabpanel" class="tab-pane active" id="base-common-setting">
+										<form class="form-horizontal">
+											<div class="row">
+												<div class="dtm-edtblk-title">通用颜色</div>
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 图背景颜色
+														</label>
+													</div>
+													<input type="text" class="form-control" id="background-color" placeholder="请输入颜色">
+												</div>
+
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 系列默认颜色列表
+														</label>
+													</div>
+													<input type="text" class="form-control" id="series-item-color" placeholder="请输入颜色">
+												</div>
+											</div>
+										</form>
+
+									</div>
+									<div role="tabpanel" class="tab-pane" id="base-high-setting">高级</div>
+									<div role="tabpanel" class="tab-pane" id="base-series0-setting">系列0</div>
+									<div role="tabpanel" class="tab-pane" id="base-series1-setting">系列1</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="param-title-setting">
+								<ul class="nav nav-tabs nav3" role="tablist">
+									<li role="presentation" class="active"><a href="#title-content-setting" aria-controls="title-content-setting" role="tab" data-toggle="tab">内容</a></li>
+									<li role="presentation"><a href="#title-style-setting" aria-controls="title-style-setting" role="tab" data-toggle="tab">样式</a></li>
+								</ul>
+								<div class="tab-content content3">
+									<div role="tabpanel" class="tab-pane active" id="title-content-setting">
+										<form class="form-horizontal">
+											<div class="row">
+												<div class="dtm-edtblk-title">通用颜色</div>
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 图背景颜色
+														</label>
+													</div>
+													<input type="text" class="form-control" id="background-color" placeholder="请输入颜色">
+												</div>
+
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 系列默认颜色列表
+														</label>
+													</div>
+													<input type="text" class="form-control" id="series-item-color" placeholder="请输入颜色">
+												</div>
+											</div>
+										</form>
+
+									</div>
+									<div role="tabpanel" class="tab-pane" id="title-style-setting">样式</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="param-grid-setting">
+								<ul class="nav nav-tabs nav3" role="tablist">
+									<li role="presentation" class="active"><a href="#grid-position-setting" aria-controls="grid-position-setting" role="tab" data-toggle="tab">位置</a></li>
+									<li role="presentation"><a href="#grid-style-setting" aria-controls="grid-style-setting" role="tab" data-toggle="tab">外观</a></li>
+								</ul>
+								<div class="tab-content content3">
+									<div role="tabpanel" class="tab-pane active" id="grid-position-setting">
+										<form class="form-horizontal">
+											<div class="row">
+												<div class="dtm-edtblk-title">通用颜色</div>
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 图背景颜色
+														</label>
+													</div>
+													<input type="text" class="form-control" id="background-color" placeholder="请输入颜色">
+												</div>
+
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 系列默认颜色列表
+														</label>
+													</div>
+													<input type="text" class="form-control" id="series-item-color" placeholder="请输入颜色">
+												</div>
+											</div>
+										</form>
+
+									</div>
+									<div role="tabpanel" class="tab-pane" id="grid-style-setting">外观</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="param-xAxis-setting">
+								<ul class="nav nav-tabs nav3" role="tablist">
+									<li role="presentation" class="active"><a href="#xAxis-base-setting" aria-controls="xAxis-base-setting" role="tab" data-toggle="tab">基础</a></li>
+									<li role="presentation"><a href="#xAxis-line-setting" aria-controls="xAxis-line-setting" role="tab" data-toggle="tab">轴线</a></li>
+									<li role="presentation"><a href="#xAxis-label-setting" aria-controls="xAxis-label-setting" role="tab" data-toggle="tab">标签</a></li>
+									<li role="presentation"><a href="#xAxis-tick-setting" aria-controls="xAxis-tick-setting" role="tab" data-toggle="tab">刻度</a></li>
+									<li role="presentation"><a href="#xAxis-splitLine-setting" aria-controls="xAxis-splitLine-setting" role="tab" data-toggle="tab">隔线</a></li>
+									<li role="presentation"><a href="#xAxis-splitArea-setting" aria-controls="xAxis-splitArea-setting" role="tab" data-toggle="tab">隔区</a></li>
+								</ul>
+								<div class="tab-content content3">
+									<div role="tabpanel" class="tab-pane active" id="xAxis-base-setting">
+										<form class="form-horizontal">
+											<div class="row">
+												<div class="dtm-edtblk-title">通用颜色</div>
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 图背景颜色
+														</label>
+													</div>
+													<input type="text" class="form-control" id="background-color" placeholder="请输入颜色">
+												</div>
+
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 系列默认颜色列表
+														</label>
+													</div>
+													<input type="text" class="form-control" id="series-item-color" placeholder="请输入颜色">
+												</div>
+											</div>
+										</form>
+
+									</div>
+									<div role="tabpanel" class="tab-pane" id="xAxis-line-setting">轴线</div>
+									<div role="tabpanel" class="tab-pane" id="xAxis-label-setting">标签</div>
+									<div role="tabpanel" class="tab-pane" id="xAxis-tick-setting">刻度</div>
+									<div role="tabpanel" class="tab-pane" id="xAxis-splitLine-setting">隔线</div>
+									<div role="tabpanel" class="tab-pane" id="xAxis-splitArea-setting">隔区</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="param-yAxis-setting">
+								<ul class="nav nav-tabs nav3" role="tablist">
+									<li role="presentation" class="active"><a href="#yAxis-base-setting" aria-controls="yAxis-base-setting" role="tab" data-toggle="tab">基础</a></li>
+									<li role="presentation"><a href="#yAxis-line-setting" aria-controls="yAxis-line-setting" role="tab" data-toggle="tab">轴线</a></li>
+									<li role="presentation"><a href="#yAxis-label-setting" aria-controls="yAxis-label-setting" role="tab" data-toggle="tab">标签</a></li>
+									<li role="presentation"><a href="#yAxis-tick-setting" aria-controls="yAxis-tick-setting" role="tab" data-toggle="tab">刻度</a></li>
+									<li role="presentation"><a href="#yAxis-splitLine-setting" aria-controls="yAxis-splitLine-setting" role="tab" data-toggle="tab">隔线</a></li>
+									<li role="presentation"><a href="#yAxis-splitArea-setting" aria-controls="yAxis-splitArea-setting" role="tab" data-toggle="tab">隔区</a></li>
+								</ul>
+								<div class="tab-content content3">
+									<div role="tabpanel" class="tab-pane active" id="yAxis-base-setting">
+										<form class="form-horizontal">
+											<div class="row">
+												<div class="dtm-edtblk-title">通用颜色</div>
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 图背景颜色
+														</label>
+													</div>
+													<input type="text" class="form-control" id="background-color" placeholder="请输入颜色">
+												</div>
+
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 系列默认颜色列表
+														</label>
+													</div>
+													<input type="text" class="form-control" id="series-item-color" placeholder="请输入颜色">
+												</div>
+											</div>
+										</form>
+
+									</div>
+									<div role="tabpanel" class="tab-pane" id="yAxis-line-setting">轴线</div>
+									<div role="tabpanel" class="tab-pane" id="yAxis-label-setting">标签</div>
+									<div role="tabpanel" class="tab-pane" id="yAxis-tick-setting">刻度</div>
+									<div role="tabpanel" class="tab-pane" id="yAxis-splitLine-setting">隔线</div>
+									<div role="tabpanel" class="tab-pane" id="yAxis-splitArea-setting">隔区</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="param-legend-setting">
+								<ul class="nav nav-tabs nav3" role="tablist">
+									<li role="presentation" class="active"><a href="#legend-base-setting" aria-controls="legend-base-setting" role="tab" data-toggle="tab">基础</a></li>
+								</ul>
+								<div class="tab-content content3">
+									<div role="tabpanel" class="tab-pane active" id="legend-base-setting">
+										<form class="form-horizontal">
+											<div class="row">
+												<div class="dtm-edtblk-title">通用颜色</div>
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 图背景颜色
+														</label>
+													</div>
+													<input type="text" class="form-control" id="background-color" placeholder="请输入颜色">
+												</div>
+
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 系列默认颜色列表
+														</label>
+													</div>
+													<input type="text" class="form-control" id="series-item-color" placeholder="请输入颜色">
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="param-tooltip-setting">
+								<ul class="nav nav-tabs nav3" role="tablist">
+									<li role="presentation" class="active"><a href="#tooltip-common-setting" aria-controls="tooltip-common-setting" role="tab" data-toggle="tab">通用</a></li>
+									<li role="presentation"><a href="#tooltip-series0-setting" aria-controls="tooltip-series0-setting" role="tab" data-toggle="tab">系列0</a></li>
+									<li role="presentation"><a href="#tooltip-series1-setting" aria-controls="tooltip-series1-setting" role="tab" data-toggle="tab">系列1</a></li>
+								</ul>
+								<div class="tab-content content3">
+									<div role="tabpanel" class="tab-pane active" id="tooltip-common-setting">
+										<form class="form-horizontal">
+											<div class="row">
+												<div class="dtm-edtblk-title">通用颜色</div>
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 图背景颜色
+														</label>
+													</div>
+													<input type="text" class="form-control" id="background-color" placeholder="请输入颜色">
+												</div>
+
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 系列默认颜色列表
+														</label>
+													</div>
+													<input type="text" class="form-control" id="series-item-color" placeholder="请输入颜色">
+												</div>
+											</div>
+										</form>
+
+									</div>
+									<div role="tabpanel" class="tab-pane" id="tooltip-series0-setting">系列0</div>
+									<div role="tabpanel" class="tab-pane" id="tooltip-series1-setting">系列1</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="param-toolbox-setting">
+								<ul class="nav nav-tabs nav3" role="tablist">
+									<li role="presentation" class="active"><a href="#toolbox-base-setting" aria-controls="toolbox-base-setting" role="tab" data-toggle="tab">基础</a></li>
+								</ul>
+								<div class="tab-content content3">
+									<div role="tabpanel" class="tab-pane active" id="toolbox-base-setting">
+										<form class="form-horizontal">
+											<div class="row">
+												<div class="dtm-edtblk-title">通用颜色</div>
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 图背景颜色
+														</label>
+													</div>
+													<input type="text" class="form-control" id="background-color" placeholder="请输入颜色">
+												</div>
+
+												<div class="sub-row">
+													<div class="checkbox">
+														<label>
+														  	<input type="checkbox"> 系列默认颜色列表
+														</label>
+													</div>
+													<input type="text" class="form-control" id="series-item-color" placeholder="请输入颜色">
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="param-code-setting">
+								代码
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 添加图表modal -->
+		<!-- Modal -->
+		<div class="modal fade" id="addChartModal" tabindex="-1" role="dialog" aria-labelledby="addChartModalLabel">
+			<div class="modal-dialog" role="document" style="width: 800px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<div class="modal-body">
+						<div>
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active"><a href="#line-demo" aria-controls="line-demo" role="tab" data-toggle="tab">折线图</a></li>
+								<li role="presentation"><a href="#bar-demo" aria-controls="bar-demo" role="tab" data-toggle="tab">柱状图</a></li>
+								<li role="presentation"><a href="#pie-demo" aria-controls="pie-demo" role="tab" data-toggle="tab">饼图</a></li>
+								<li role="presentation"><a href="#map-demo" aria-controls="map-demo" role="tab" data-toggle="tab">地图</a></li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div id="addChartTabs" class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="line-demo">
+									<ul>
+										<li onclick='addGrid("line_base")'><img class="chart-demo img-thumbnail" src="img/charts/line11.png"><span>标准折线图</span></li>
+										<li onclick='addGrid("line_area_base")'><img class="chart-demo img-thumbnail" src="img/charts/line11.png"><span>标准折线图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/line11.png"><span>标准折线图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/line11.png"><span>标准折线图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/line11.png"><span>标准折线图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/line11.png"><span>标准折线图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/line11.png"><span>标准折线图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/line11.png"><span>标准折线图</span></li>
+									</ul>
+								</div>
+								<div role="tabpanel" class="tab-pane" id="bar-demo"><br />
+									<ul>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/bar1.png"><span>标准柱状图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/bar1.png"><span>标准柱状图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/bar1.png"><span>标准柱状图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/bar1.png"><span>标准柱状图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/bar1.png"><span>标准柱状图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/bar1.png"><span>标准柱状图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/bar1.png"><span>标准柱状图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/bar1.png"><span>标准柱状图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/bar1.png"><span>标准柱状图</span></li>
+									</ul>
+								</div>
+								<div role="tabpanel" class="tab-pane" id="pie-demo">
+									<ul>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/pie1.png"><span>标准饼图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/pie1.png"><span>标准饼图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/pie1.png"><span>标准饼图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/pie1.png"><span>标准饼图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/pie1.png"><span>标准饼图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/pie1.png"><span>标准饼图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/pie1.png"><span>标准饼图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/pie1.png"><span>标准饼图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/pie1.png"><span>标准饼图</span></li>
+									</ul>
+								</div>
+								<div role="tabpanel" class="tab-pane" id="map-demo">
+									<ul>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/map1.png"><span>标准地图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/map1.png"><span>标准地图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/map1.png"><span>标准地图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/map1.png"><span>标准地图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/map1.png"><span>标准地图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/map1.png"><span>标准地图</span></li>
+										<li><img class="chart-demo img-thumbnail" src="img/charts/map1.png"><span>标准地图</span></li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/jquery.gridster.js"></script>
+		<script type="text/javascript" src="js/echarts/dist/echarts.js"></script>
+		<script type="text/javascript" src="js/component/charts/chartCommon.js"></script>
+		<script type="text/javascript" src="js/component/charts/barChart.js"></script>
+		<script type="text/javascript" src="js/component/charts/lineChart.js"></script>
+		<script type="text/javascript" src="js/component/charts/pieChart.js"></script>
+		<script type="text/javascript" src="js/component/charts/mapChart.js"></script>
+		<script type="text/javascript" src="js/component/component.js"></script>
+				<script type="text/javascript" src="js/index.js"></script>
+	</body>
+
+</html>

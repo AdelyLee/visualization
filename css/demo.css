@@ -1,0 +1,151 @@
+.gridster * {
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	list-style-type: none;
+}
+
+header {
+	z-index: 1000;
+	position: fixed;
+	height: 40px;
+	background: #373941;
+	width: 100%;
+	top: 0px;
+}
+
+#settings {
+	line-height: 40px;
+	color: #ffffff;
+}
+
+
+/*/
+/* demo
+/*/
+
+body {
+	font-size: 16px;
+	font-family: 'Helvetica Neue', Arial, sans-serif;
+	color: #444;
+}
+
+.controls {
+	margin-bottom: 20px;
+}
+
+#content {
+	margin-top: 70px;
+	margin-left: 40px;
+}
+
+.setting {
+	height: 40px;
+	width: 100%;
+	top: -38px;
+	text-align: center;
+	line-height: 40px;
+	/*position: absolute;*/
+	z-index: 100;
+	background-color: rgba(0, 0, 0, 0.7);
+	color: #fff;
+	font-size: 16px;
+}
+
+.chart-demo {
+	height: 100px;
+	width: 200px;
+}
+
+drag.btn {
+	display: inline;
+	cursor: move;
+}
+
+.btn {
+	margin-left: 10px;
+}
+
+.btn:hover {
+	color: #adc7df;
+}
+
+#addChartTabs ul {
+	width: 770px;
+	height: 500px;
+	padding: 20px 10px 20px 10px;
+}
+
+#addChartTabs li {
+	height: 150px;
+	width: 230px;
+	display: block;
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	padding: 15px;
+	cursor: pointer;
+}
+
+#addChartTabs li:hover {
+	background-color: #CCCCCC;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+#addChartTabs li span {
+	font-size: 18px;
+	font-weight: bold;
+	color: #286090;
+	display: block;
+}
+
+
+/*/
+/* gridster
+/*/
+
+.gridster ul {
+	background-color: #EFEFEF;
+}
+
+.gridster li {
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	line-height: 100%;
+}
+
+.gridster {
+	margin: 0 auto;
+	opacity: .8;
+	-webkit-transition: opacity .6s;
+	-moz-transition: opacity .6s;
+	-o-transition: opacity .6s;
+	-ms-transition: opacity .6s;
+	transition: opacity .6s;
+}
+
+.gridster .gs-w {
+	background: #DDD;
+	cursor: pointer;
+}
+
+.gridster .player {
+	background: #BBB;
+}
+
+.gridster .preview-holder {
+	border: none!important;
+	background: red!important;
+}
+
+#settingBox {
+	width: 750px;
+	height: 735px;
+	top: 40px;
+	position: absolute;
+	background-color: #999;
+}
